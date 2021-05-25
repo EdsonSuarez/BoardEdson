@@ -1,10 +1,12 @@
 // Importaciones
 const express = require("express");
 const mongoose = require("mongoose");
+const User = require("./routes/user");
 
 // La aplicacion
 const app = express();
 app.use(express.json());
+app.use("/api/user/", User);
 
 // puerto app
 const port = process.env.PORT || 3000;
