@@ -11,14 +11,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // generador de jwt
-userSchema.methods.generateJWT = () => {
+userSchema.methods.generateJWT = function () {
   return jwt.sign(
     {
       _id: this._id,
       name: this.name,
       iat: moment().unix(),
     },
-    "PalabraSecreta"
+    "secretJWT"
   );
 };
 
