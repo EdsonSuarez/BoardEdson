@@ -2,14 +2,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./routes/user");
-
+const Auth = require("./routes/auth");
 // La aplicacion
 const app = express();
 app.use(express.json());
 app.use("/api/user/", User);
-
+app.use("/api/auth/", Auth);
 // puerto app
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log("Localhost:", port));
 
 mongoose
