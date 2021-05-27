@@ -18,4 +18,12 @@ router.post("/saveTask", Auth, async (req, res) => {
   return res.status(200).send({result});
 });
 
+// consultar todas las actividades
+router.get("/listTask", Auth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) return res.status(401).send("La porsona no existe en DB");
+  const board = await Board.find({ userId: req.user._id });
+  return res.status(200).send({ board });
+});
+
 module.exports = router;
