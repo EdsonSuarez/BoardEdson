@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// Comprobar token del usuario
 const auth = (req, res, next) => {
   let jwtToken = req.header("Authorization");
   if (!jwtToken) return res.status(400).send("No hay token");
@@ -11,7 +12,7 @@ const auth = (req, res, next) => {
     req.user = payload;
     next();
   } catch (error) {
-    return res.status(401).send("Token no valido1111");
+    return res.status(401).send("Token no valido");
   }
 };
 

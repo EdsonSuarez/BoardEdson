@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
-//Schema
+// Esquema de la colección User
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 
-// generador de jwt
+// Generador de jwt
 userSchema.methods.generateJWT = function () {
   return jwt.sign(
     {

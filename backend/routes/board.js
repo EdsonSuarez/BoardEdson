@@ -4,7 +4,7 @@ const Board = require("../models/board");
 const User = require("../models/user");
 const Auth = require("../middleware/auth");
 
-// guardar actividad
+// Guardar actividad
 router.post("/saveTask", Auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) return res.status(401).send("El usuario no esta autenticado");
@@ -18,7 +18,7 @@ router.post("/saveTask", Auth, async (req, res) => {
   return res.status(200).send({ result });
 });
 
-// consultar todas las actividades
+// Consultar todas las actividades
 router.get("/listTask", Auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) return res.status(401).send("La porsona no existe en DB");
@@ -26,7 +26,7 @@ router.get("/listTask", Auth, async (req, res) => {
   return res.status(200).send({ board });
 });
 
-// editar actividad
+// Editar actividad
 router.put("/updateTask", Auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) return res.status(401).send("La persona no existe en DB");
@@ -40,7 +40,7 @@ router.put("/updateTask", Auth, async (req, res) => {
   return res.status(200).send({ board });
 });
 
-// eliminar actividad
+// Eliminar actividad
 router.delete("/:_id", Auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (!user) return res.status(401).send("La persona no existe en DB");
