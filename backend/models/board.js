@@ -4,7 +4,7 @@ const moment = require("moment");
 
 // Esquema de la colección Board
 const boardSchema = new mongoose.Schema({
-  userId: String,
+  userId: { type: mongoose.Schema.ObjectId, ref: "user" },
   name: String,
   description: String,
   status: String,

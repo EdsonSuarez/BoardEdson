@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  roleId: { type: mongoose.Schema.ObjectId, ref: "role" },
+  active: Boolean,
   date: { type: Date, default: Date.now },
 });
 
@@ -16,9 +18,12 @@ userSchema.methods.generateJWT = function () {
     {
       _id: this._id,
       name: this.name,
+      email: this.email,
+      roleId: this.roleId,
       iat: moment().unix(),
+      
     },
-    "secretJWT"
+    process.env.SECRET_kEY_JWT
   );
 };
 
