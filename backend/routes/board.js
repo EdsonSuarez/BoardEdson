@@ -5,6 +5,12 @@ const mongoose = require("mongoose");
 const Board = require("../models/board");
 const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
+
+const multipart = require("connect-multiparty");
+const mult = multipart();
+const fs = require("fs");
+const path = require("path");
+const moment = require("moment");
 const Upload = require("../middleware/file");
 
 // Guardar actividad
@@ -26,29 +32,21 @@ router.post("/saveTask", Auth, UserAuth, async (req, res) => {
 });
 
 // save task with img
-router.post(
-  "/saveTaskImg",
-  Upload.single("image"),
-  Auth,
-  UserAuth,
-  async (req, res) => {
+router.post("/saveTaskImg", mult, Upload, Auth, UserAuth, async (req, res) => {
     if (!req.body.name || !req.body.description)
       return res.status(401).send("Process failed: Incomplete data");
 
-    if (req.file) {
-      if (
-        req.file.mimetype !== "image/png" &&
-        req.file.mimetype !== "image/jpg" &&
-        req.file.mimetype !== "image/jpeg" &&
-        req.file.mimetype !== "image/gif"
-      )
-        return res.status(401).send("Accepte format: .png, .jpg, .jpeg, .gif");
+    let imageUrl ="";
+    if (req.files !== undefined && req.files.image.type) {
+      const url = req.protocol + "://" + req.get("host") + "/";
+      let serverImg =
+        "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+      fs.createReadStream(req.files.image.path).pipe(
+        fs.createWriteStream(serverImg)
+      );
+      imageUrl =
+        url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
     }
-
-    const url = req.protocol + "://" + req.get("host");
-    let imageUrl = "";
-    if (req.file !== undefined && req.file.filename)
-      imageUrl = url + "/uploads/" + req.file.filename;
 
     const board = new Board({
       userId: req.user._id,
