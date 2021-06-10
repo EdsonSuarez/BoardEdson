@@ -10,9 +10,12 @@ npm install nodemon --save-dev
 ```
 
 ### Installacion Frontend
-npm install -g @angular/cli
-ng new frontend
+
+```
+npm install -g @angular/cli  // se instala en el pc
+ng new frontend // para crear un nuevo proyecto
 ng serve //para correr el servidor
+```
 
 
 ```
