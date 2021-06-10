@@ -28,6 +28,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,23 @@ import { MatExpansionModule } from '@angular/material/expansion';
     UpdateUserComponent,
     ListTaskComponent,
     SaveTaskComponent,
+
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatIconModule, MatExpansionModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatIconModule,
+    MatExpansionModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [AuthService, BoardService, AuthGuard, TokenInterceptorService],
   bootstrap: [AppComponent],
 })

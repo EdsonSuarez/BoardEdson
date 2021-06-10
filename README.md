@@ -10,15 +10,17 @@ npm install nodemon --save-dev
 ```
 
 ### Installacion Frontend
+npm install -g @angular/cli
+ng new frontend
 ng serve //para correr el servidor
 
 
-``
+```
 ng generate component home/header // para crear component
 ng g c admin/update-role  // para crear component
 ng g s services/token-interceptor // para crear service
 ng g guard guard/auth
-
+```
 
 ```
 ng add @angular/material //para diseño y efectos visuales

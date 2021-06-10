@@ -10,6 +10,7 @@ import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
+import { RegisterComponent } from './home/register/register.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   },
   {
     path: 'register',
+    component: RegisterComponent,
+  },
+  
+  {
+    path: 'registerUser',
     component: RegisterUserComponent,
   },
   {
