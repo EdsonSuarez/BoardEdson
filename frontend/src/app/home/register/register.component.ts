@@ -32,11 +32,12 @@ export class RegisterComponent implements OnInit {
       this.registerData = {};
     } else {
       this.auth.registerUser(this.registerData).subscribe(
-        (res) => {
+        (res: any) => {
           console.log(res);
-          this.successMessage = "Register user: successful";
-          this.closeAlert();
+          localStorage.setItem('token', res.jwtToken);
           this.registerData = {};
+          this.router.navigate(['/saveTask']);
+
         },
         (err) => {
           console.log(err);
@@ -50,13 +51,11 @@ export class RegisterComponent implements OnInit {
 
   closeAlert() {
     setTimeout(() => {
-      this.successMessage = '';
       this.errorMessage = '';
     }, 3000);
   }
 
   closeX() {
-    this.successMessage = '';
     this.errorMessage = '';
   }
 
