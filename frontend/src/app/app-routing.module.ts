@@ -11,20 +11,13 @@ import { RegisterRoleComponent } from './admin/register-role/register-role.compo
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { RegisterComponent } from './home/register/register.component';
+import { AuthGuard } from "./guard/auth.guard";
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
     pathMatch: 'full'
-  },
-  {
-    path: 'listTasks',
-    component: ListTaskComponent,
-  },
-  {
-    path: 'saveTask',
-    component: SaveTaskComponent,
   },
   {
     path: 'login',
@@ -34,31 +27,46 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
-  
+  {
+    path: 'listTask',
+    component: ListTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'saveTask',
+    component: SaveTaskComponent,
+    canActivate: [AuthGuard],
+  },  
   {
     path: 'registerUser',
     component: RegisterUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'updateUser',
     component: UpdateUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'listUsers',
     component: ListUserComponent,
+    canActivate: [AuthGuard],
   },
   
   {
     path: 'listRole',
     component: ListRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'registerRole',
     component: RegisterRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'updateRole',
     component: UpdateRoleComponent,
+    canActivate: [AuthGuard],
   }
 ];
 

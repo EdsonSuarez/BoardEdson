@@ -16,11 +16,12 @@ import { ListTaskComponent } from './board/list-task/list-task.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
 
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guard/auth.guard';
 import { BoardService } from './services/board.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { AuthGuard } from './guard/auth.guard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,8 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +47,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UpdateUserComponent,
     ListTaskComponent,
     SaveTaskComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -62,7 +63,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, BoardService, AuthGuard, TokenInterceptorService],
+  providers: [
+    AuthService,
+    BoardService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
