@@ -29,11 +29,8 @@ export class SaveTaskComponent implements OnInit {
         (res: any) => {
           console.log(res);
           //localStorage.setItem('token', res.jwtToken);
-          this.taskData = {};
-          console.log("1111111111");
-          
-          this.router.navigate(['/listTask']);
-          console.log("222222222222");
+          this.taskData = {};          
+          this.router.navigate(['/listTasks']);
         },
         (err) => {
           console.log(err);

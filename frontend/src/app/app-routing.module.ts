@@ -28,7 +28,7 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'listTask',
+    path: 'listTasks',
     component: ListTaskComponent,
     canActivate: [AuthGuard],
   },
