@@ -28,8 +28,37 @@ export class ListTaskComponent implements OnInit {
       }
     )
   }
-  updateTask(task: any, status: String){}
-  deleteTask(task: any){}
+  updateTask(task: any, status: String){
+    const tempStatus =task.status;
+    task.status = status;
+    this.board.updateTask(task).subscribe(
+      (res) => {
+        task.status = status;
+      },
+
+      (err) => {
+        task.status = tempStatus;
+        this.errorMessage = err.error;
+        this.closeAlert();
+      }
+    );
+  }
+  deleteTask(task: any){
+    this.board.deleteTask(task).subscribe(
+      (res) => {
+        const index = this.tasksData.indexOf(task);
+        if (index > -1){
+          this.tasksData.splice(index, 1);
+          this.successMessage = 'Task delete';
+          this.closeAlert();
+        }
+      },
+      (err) => {
+        this.errorMessage = err.error;
+        this.closeAlert();
+      }
+    )
+  }
   closeAlert() {
     setTimeout(() => {
       this.errorMessage = '';
